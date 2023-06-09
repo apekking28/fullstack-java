@@ -2,7 +2,6 @@
 
 
 # Back end
-
 # A.Technology
 - Spring boot 
 - JPA
@@ -10,6 +9,7 @@
 
 
 # Front end
+# A.Technology
 - React 
 - React Router Dom
 - axios 
