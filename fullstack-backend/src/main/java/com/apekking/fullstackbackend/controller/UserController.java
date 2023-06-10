@@ -3,6 +3,7 @@ package com.apekking.fullstackbackend.controller;
 import com.apekking.fullstackbackend.exception.UserNotFoundException;
 import com.apekking.fullstackbackend.model.User;
 import com.apekking.fullstackbackend.repository.UserRepository;
+import com.apekking.fullstackbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,40 +16,32 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/user")
     User newUser(@RequestBody User newUser){
-        return userRepository.save(newUser);
+        return userService.addUser(newUser);
     }
 
     @GetMapping("/users")
     List<User> getAllUsers(){
-        return userRepository.findAll();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/user/{id}")
     User getUserById(@PathVariable Long id){
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+        return userService.getUserDetail(id);
     }
 
     @PutMapping("/user/{id}")
     User updateUser(@RequestBody User newUser,@PathVariable Long id){
-        return userRepository.findById(id)
-                .map(user -> {
-                    user.setName(newUser.getName());
-                    user.setUsername(newUser.getUsername());
-                    user.setEmail(newUser.getEmail());
-                    return userRepository.save(user);
-                }).orElseThrow(() -> new UserNotFoundException(id));
+        return userService.updateUser(id,newUser);
     }
 
     @DeleteMapping("/user/{id}")
     String deleteUser(@PathVariable Long id){
-        if(!userRepository.existsById(id)){
-            throw new UserNotFoundException(id);
-        }
-        userRepository.deleteById(id);
-        return "User with id " + id + " has been deleted success.";
+        return userService.deleteUser(id);
     }
 
 }
