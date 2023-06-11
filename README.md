@@ -1,15 +1,38 @@
-# Simple CRUD (Create,Read,Update,Delete)
+# Simple CRUD 
 
 
-# Back end
-# A.Technology
-- Spring boot 
+## Back end
+### Tech
+- Spring boot
 - JPA
-- MysQL
+- MySQL
 
 
-# Front end
-# A.Technology
+## Front end
+### Tech
 - React 
 - React Router Dom
+- Boostraps
 - axios 
+
+
+## Features
+
+- Create user
+- Read user
+- Update user
+- Delete user
+
+And this will produce a flow chart:
+```mermaid
+graph LR
+A[Backend] -- Provide API --> B[API]
+B -- Consume API --> C[Frontend]
+```
+## API's
+- GET `http://localhost:8080/users` - > Get all users
+- POST`http://localhost:8080/user` - > Add new user
+- GET `http://localhost:8080/user/{id}` - > Get detail user
+- PUT `http://localhost:8080/user/{id}` - > Update user
+- DELETE `http://localhost:8080/user/{id}` - > Delete user
+
